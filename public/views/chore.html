@@ -1,4 +1,4 @@
 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-  <input type="checkbox" class="mdl-checkbox__input" />
-  <span class="mdl-checkbox__label">{{chore}}</span>
+  <input type="checkbox" class="mdl-checkbox__input" (click)="handleClick()"/>
+  <span class="mdl-checkbox__label" (click)="handleClick()">{{_chore.name}}</span>
 </label>

@@ -12,58 +12,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 /// <reference path="typings/angular2/angular2.d.ts" />
 var angular2_1 = require('angular2/angular2');
 var chore_person_1 = require("./chore-person");
+var chore_store_1 = require("./chore_store");
 var Chores = (function () {
-    function Chores() {
-        this.people = [
-            {
-                id: 1,
-                name: "Jason",
-                image: "images/jason.jpg",
-                chores: []
-            },
-            {
-                id: 2,
-                name: "Yanni",
-                image: "images/yanni.jpg",
-                chores: []
-            },
-            {
-                id: 3,
-                name: "Sydney",
-                image: "images/sydney.jpg",
-                chores: [
-                    "Clean Bathroom",
-                    "Clean Living Room"
-                ]
-            },
-            {
-                id: 4,
-                name: "Mike",
-                image: "images/mike.jpg",
-                chores: [
-                    "dishes"
-                ]
-            },
-            {
-                id: 5,
-                name: "Bogac",
-                image: "images/bogac.jpg",
-                chores: [
-                    "Take out Trash"
-                ]
-            }
-        ];
+    function Chores(choreStore) {
+        this.choreStore = choreStore;
     }
     Chores = __decorate([
         angular2_1.Component({
-            selector: "chores"
+            selector: "chores",
+            appInjector: [chore_store_1.ChoreStore]
         }),
         angular2_1.View({
             templateUrl: "views/chores.html",
             directives: [chore_person_1.ChorePerson, angular2_1.NgFor]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [chore_store_1.ChoreStore])
     ], Chores);
     return Chores;
 })();
-angular2_1.bootstrap(Chores);
+angular2_1.bootstrap(Chores, [angular2_1.httpInjectables]);

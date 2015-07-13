@@ -1,55 +1,40 @@
 /// <reference path="typings/angular2/angular2.d.ts" />
-import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
+import {
+  Component,
+  View,
+  bootstrap,
+  NgFor,
+  Injectable,
+  Http,
+  RequestOptions,
+  Headers,
+  httpInjectables
+} from 'angular2/angular2';
 import {ChorePerson} from "./chore-person";
+import {ChoreStore} from "./chore_store";
+
 @Component({
-  selector: "chores"
+  selector: "chores",
+  appInjector: [ChoreStore]
 })
 @View({
   templateUrl: "views/chores.html",
   directives: [ChorePerson, NgFor]
 })
 class Chores{
-  people: List<any> = [
-    {
-      id: 1,
-      name: "Jason",
-      image: "images/jason.jpg",
-      chores: [
-      ]
-    },
-    {
-      id: 2,
-      name: "Yanni",
-      image: "images/yanni.jpg",
-      chores: [
-      ]
-    },
-    {
-      id: 3,
-      name: "Sydney",
-      image: "images/sydney.jpg",
-      chores: [
-        "Clean Bathroom",
-        "Clean Living Room"
-      ]
-    },
-    {
-      id: 4,
-      name: "Mike",
-      image: "images/mike.jpg",
-      chores: [
-        "dishes"
-      ]
-    },
-    {
-      id: 5,
-      name: "Bogac",
-      image: "images/bogac.jpg",
-      chores: [
-        "Take out Trash"
-      ]
-    }
-  ];
-  constructor(){}
+  constructor(private choreStore: ChoreStore){
+  }
 }
-bootstrap(Chores);
+bootstrap(Chores, [httpInjectables]);
+
+export interface Chore{
+  name: string,
+  completed: boolean
+}
+
+interface Person{
+  name: string,
+  email: string,
+  picture: string,
+  chores: List<Chore>
+}
